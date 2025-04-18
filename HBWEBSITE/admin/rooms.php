@@ -153,6 +153,41 @@ adminLogin();
     </div>
   </div>
 
+  <!-- Manage room images modal -->
+
+<div class="modal fade" id="room-images" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Room Name</h1>
+        <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       <div class="border-bottom border-3 pb-3 mb-3">
+            <form id="add_image_form">
+               <label class="form-label fw-bold">Add Image</label>
+               <input type="file" name="image" accept=".jpg, .png, .webp, .jpeg" class="form-control shadow-none mb-3" required>
+               <button class="btn custom-bg text-white shadow-none">ADD</button>
+               <input type="hidden" name="room_id">
+            </form>
+        </div>
+        <div class="table-responsive-lg" style="height: 350px; overflow-y: scroll;">
+              <table class="table table-hover border">
+                <thead>
+                  <tr class="bg-dark text-light sticky-top">
+                    <th scope="col" width="60%">Image</th>
+                    <th scope="col">Thumb</th>
+                    <th scope="col">Delete</th>
+                  </tr>
+                </thead>
+                <tbody id="room-image-data"></tbody>
+              </table>
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
+
   <?php require('inc/scripts.php'); ?>
 
   <script>
@@ -225,6 +260,44 @@ adminLogin();
     window.onload = function () {
       get_all_rooms();
     }
+
+    let add_image_form = document.getElementById('add_image_form');
+
+    add_image_form.addEventListener('submit', function(e){
+      e.preventDefault();
+      add_image();
+    });
+
+ function add_image() 
+ {
+      let data = new FormData();
+      data.append("image", add_image_form.elements['image'].files[0]);
+      data.append("room_id", add_image_form.elements['room_id'].value);
+      data.append("add_image", "");
+
+      let xhr = new XMLHttpRequest();
+      xhr.open("POST", "ajax/carousel_crud.php", true);
+
+      xhr.onload = function () 
+      {
+        if (this.responseText == "inv_img") {
+          alert("error", "Only JPG, WEBP or PNG images are allowed!");
+        } else if (this.responseText == "inv_size") {
+          alert("error", "Image should be less than 2MB!");
+        } else if (this.responseText == "upd_failed") {
+          alert("error", "Image upload failed. Server Down!");
+        } else {
+          alert("success", "New image added!");
+          add_image_form.reset();
+        }
+      }
+      xhr.send(data);
+ }
+
+ window.onload = function(){
+     get_all_rooms();
+ }
+
   </script>
   
 

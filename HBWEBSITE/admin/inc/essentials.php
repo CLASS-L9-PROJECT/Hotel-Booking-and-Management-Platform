@@ -6,6 +6,8 @@ define('SITE_URL','http://localhost:8080/hbwebsite/');
 define('ABOUT_IMG_PATH' , SITE_URL. 'images/about/');
 define('CAROUSEL_IMG_PATH', SITE_URL.'images/carousel/');
 define('FACILITIES_IMG_PATH', SITE_URL.'images/facilities/');
+define('ROOMS_IMG_PATH', SITE_URL.'images/rooms/');
+define('PROFILE_FOLDER', 'profiles/');
 
 
 //backend upload process needs this data
@@ -14,6 +16,7 @@ define('UPLOAD_IMAGE_PATH', $_SERVER['DOCUMENT_ROOT'].'/hbwebsite/images/');
 define('ABOUT_FOLDER', 'about/');
 define('CAROUSEL_FOLDER','carousel/');
 define('FACILITIES_FOLDER','facilities/');
+define('ROOMS_FOLDER','rooms/');
 
 function adminLogin()
 {
