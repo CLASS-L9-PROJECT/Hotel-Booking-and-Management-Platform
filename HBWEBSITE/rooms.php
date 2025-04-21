@@ -128,8 +128,12 @@
               <h6 class="mb-4">200$ per night</h6>
               <a href="#" class="btn btn-sm w-100 text-white custom-bg shadow-none">Book Now
               </a>
-              <a href="#" class="btn btn-sm w-100 btn-outline-dark shadow-none mb-2">More details
-              </a>
+              <a 
+  href="room_details.php?id=<?= $room['id'] ?>" 
+  class="btn btn-sm w-100 btn-outline-dark shadow-none mb-2"
+>
+  More details
+</a>
             </div>
           </div>
         </div>
@@ -184,8 +188,12 @@
               <h6 class="mb-4">200$ per night</h6>
               <a href="#" class="btn btn-sm w-100 text-white custom-bg shadow-none">Book Now
               </a>
-              <a href="#" class="btn btn-sm w-100 btn-outline-dark shadow-none mb-2">More details
-              </a>
+              <a 
+  href="room_details.php?id=<?= $room['id'] ?>" 
+  class="btn btn-sm w-100 btn-outline-dark shadow-none mb-2"
+>
+  More details
+</a>
             </div>
           </div>
         </div>
@@ -240,8 +248,12 @@
               <h6 class="mb-4">200$ per night</h6>
               <a href="#" class="btn btn-sm w-100 text-white custom-bg shadow-none">Book Now
               </a>
-              <a href="#" class="btn btn-sm w-100 btn-outline-dark shadow-none mb-2">More details
-              </a>
+              <a 
+  href="room_details.php?id=<?= $room['id'] ?>" 
+  class="btn btn-sm w-100 btn-outline-dark shadow-none mb-2"
+>
+  More details
+</a>
             </div>
           </div>
         </div>
