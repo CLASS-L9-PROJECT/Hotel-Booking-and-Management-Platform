@@ -18,7 +18,6 @@ Provides both a public-facing site for guests to browse rooms, make reservations
 
 ## 📋 Table of Contents
 
-- [Demo Screenshots](#demo-screenshots)  
 - [Features](#features)  
 - [Technologies](#technologies)  
 - [Getting Started](#getting-started)  
@@ -26,10 +25,6 @@ Provides both a public-facing site for guests to browse rooms, make reservations
 - [Database Setup](#database-setup)  
 - [Team Members](#team-members)  
 - [License](#license)  
-
----
-
-## Demo Screenshots
 
 ---
 
