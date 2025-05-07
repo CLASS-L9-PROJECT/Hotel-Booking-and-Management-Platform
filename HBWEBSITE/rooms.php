@@ -9,7 +9,109 @@
   <?php require('inc/links.php') ?>
 </head>
 
+<style>
+.availability-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.availability-form label {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.availability-form input[type="date"] {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.availability-form button {
+    padding: 8px 15px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.availability-form button:hover {
+    background-color: #2980b9;
+}
+</style>
+
+
+
+
 <body class="bg-light">
+
+<?php
+include 'inc/db_connection.php';
+
+if (isset($_GET['check_in']) && isset($_GET['check_out'])) {
+    $checkIn = $_GET['check_in'];
+    $checkOut = $_GET['check_out'];
+
+    $checkIn = mysqli_real_escape_string($conn, $checkIn);
+    $checkOut = mysqli_real_escape_string($conn, $checkOut);
+
+    // 1. Müsait odaları çek
+    $query = "
+        SELECT * FROM rooms 
+        WHERE id NOT IN (
+            SELECT room_id FROM reservations
+            WHERE 
+                ('$checkIn' < check_out) AND 
+                ('$checkOut' > check_in)
+        )
+    ";
+    $result = mysqli_query($conn, $query);
+
+    echo "<h2>Müsait Odalar</h2>";
+    if (mysqli_num_rows($result) > 0) {
+        while ($room = mysqli_fetch_assoc($result)) {
+            echo "<div class='room-card'>";
+            echo "<h3>" . htmlspecialchars($room['room_name']) . "</h3>";
+            echo "<p>" . htmlspecialchars($room['description']) . "</p>";
+
+            // 2. Bu odaya ait tüm dolu tarihleri çek
+            $roomId = $room['id'];
+            $reservationQuery = "
+                SELECT check_in, check_out FROM reservations 
+                WHERE room_id = $roomId
+            ";
+            $resResult = mysqli_query($conn, $reservationQuery);
+
+            if (mysqli_num_rows($resResult) > 0) {
+                echo "<p><strong>Dolu Tarihler:</strong></p>";
+                echo "<ul>";
+                while ($res = mysqli_fetch_assoc($resResult)) {
+                    echo "<li>" . $res['check_in'] . " → " . $res['check_out'] . "</li>";
+                }
+                echo "</ul>";
+            } else {
+                echo "<p>Bu oda daha önce hiç rezerve edilmemiş.</p>";
+            }
+
+            echo "<a class='book-btn' href='book.php?room_id=" . $room['id'] . "'>Hemen Rezerve Et</a>";
+            echo "</div><hr>";
+        }
+    } else {
+        echo "<p>Bu tarihler için müsait oda bulunamadı.</p>";
+    }
+}
+?>
+
+
 
   <?php require('inc/header.php'); ?>
 
@@ -126,14 +228,21 @@
             </div>
             <div class="col-md-2 mt-lg-0 mt-md-0 mt-4 text-center">
               <h6 class="mb-4">200$ per night</h6>
-              <a href="#" class="btn btn-sm w-100 text-white custom-bg shadow-none">Book Now
-              </a>
-              <a 
-  href="room_details.php?id=<?= $room['id'] ?>" 
-  class="btn btn-sm w-100 btn-outline-dark shadow-none mb-2"
->
-  More details
+              <a href="reserve.php?room_id=1" class="btn btn-success w-100 mt-4">Book Now</a>
+
+
+
+
+
+
+
+              <a href="booking.php?room_id=1" 
+   class="btn btn-sm w-100 btn-outline-dark shadow-none mb-2 mt-1">
+   More details
 </a>
+<a href="cancel.php" class="btn btn-outline-danger btn-sm w-100">Cancel Reservation</a>
+
+
             </div>
           </div>
         </div>
@@ -186,14 +295,18 @@
             </div>
             <div class="col-md-2 text-center">
               <h6 class="mb-4">200$ per night</h6>
-              <a href="#" class="btn btn-sm w-100 text-white custom-bg shadow-none">Book Now
-              </a>
-              <a 
-  href="room_details.php?id=<?= $room['id'] ?>" 
-  class="btn btn-sm w-100 btn-outline-dark shadow-none mb-2"
->
-  More details
+              <a href="reserve.php?room_id=1" class="btn btn-success w-100 mt-4">Book Now</a>
+
+
+
+              <a href="booking.php?room_id=1" 
+   class="btn btn-sm w-100 btn-outline-dark shadow-none mb-2 mt-1">
+   More details
 </a>
+<a href="cancel.php" class="btn btn-outline-danger btn-sm w-100">Cancel Reservation</a>
+
+
+
             </div>
           </div>
         </div>
@@ -246,14 +359,18 @@
             </div>
             <div class="col-md-2 text-center">
               <h6 class="mb-4">200$ per night</h6>
-              <a href="#" class="btn btn-sm w-100 text-white custom-bg shadow-none">Book Now
-              </a>
-              <a 
-  href="room_details.php?id=<?= $room['id'] ?>" 
-  class="btn btn-sm w-100 btn-outline-dark shadow-none mb-2"
->
-  More details
+              <a href="reserve.php?room_id=1" class="btn btn-success w-100 mt-4">Book Now</a>
+
+
+
+              <a href="booking.php?room_id=1" 
+   class="btn btn-sm w-100 btn-outline-dark shadow-none mb-2 mt-1">
+   More details
 </a>
+<a href="cancel.php" class="btn btn-outline-danger btn-sm w-100">Cancel Reservation</a>
+
+
+
             </div>
           </div>
         </div>

@@ -1,15 +1,15 @@
 <?php
   require('inc/header.php');
-  // id parametresi yoksa odalar sayfasýna dön
+  // id parametresi yoksa odalar sayfasï¿½na dï¿½n
   if (!isset($_GET['id'])) {
     redirect('rooms.php');
   }
 
-  // Güvenli formatla
+  // Gï¿½venli formatla
   $frm = filteration(['id'=>$_GET['id']]);
   $rid = (int)$frm['id'];
 
-  // Odayý çek
+  // Odayï¿½ ï¿½ek
   $roomRes = select(
     "SELECT * FROM `rooms` WHERE `id`=? AND `status`=1",
     [$rid],
@@ -27,7 +27,7 @@
     'i'
   );
 
-  // Özellikler
+  // ï¿½zellikler
   $featRes = select(
     "SELECT f.name 
      FROM features f 
@@ -82,13 +82,13 @@
       </div>
     </div>
 
-    <!-- Sað Panel -->
+    <!-- Saï¿½ Panel -->
     <div class="col-lg-4">
       <div class="card border-0 shadow-sm p-3">
         <h4><?= htmlspecialchars($room['name']) ?></h4>
         <h5 class="text-primary"><?= htmlspecialchars($room['price']) ?>$ per night</h5>
 
-        <!-- Rating sabit 4 yýldýz olarak gösteriliyor -->
+        <!-- Rating sabit 4 yï¿½ldï¿½z olarak gï¿½steriliyor -->
         <div class="mb-3">
           <i class="bi bi-star-fill text-warning"></i>
           <i class="bi bi-star-fill text-warning"></i>
@@ -96,7 +96,7 @@
           <i class="bi bi-star-fill text-warning"></i>
         </div>
 
-        <!-- Özellikler -->
+        <!-- ï¿½zellikler -->
         <h6>Features</h6>
         <?php while($f = mysqli_fetch_assoc($featRes)): ?>
           <span class="badge bg-light text-dark me-1"><?= $f['name'] ?></span>
@@ -108,7 +108,7 @@
           <span class="badge bg-light text-dark me-1"><?= $c['name'] ?></span>
         <?php endwhile; ?>
 
-        <!-- Misafir sayýsý -->
+        <!-- Misafir sayï¿½sï¿½ -->
         <h6 class="mt-3">Guests</h6>
         <span class="badge bg-light text-dark me-1"><?= $room['adult'] ?> Adults</span>
         <span class="badge bg-light text-dark"><?= $room['children'] ?> Children</span>
@@ -117,12 +117,14 @@
         <h6 class="mt-3">Area</h6>
         <span class="badge bg-light text-dark"><?= $room['area'] ?> sq. ft.</span>
 
-        <a href="#" class="btn btn-success w-100 mt-4">Book Now</a>
+        <a <?php echo "href='payment.php?room_id=" . $room['id'] . "'"; ?> class="btn btn-success w-100 mt-4">Book Now</a>
+
+
       </div>
     </div>
   </div>
 
-  <!-- Açýklama -->
+  <!-- Aï¿½ï¿½klama -->
   <div class="row mt-5">
     <div class="col">
       <h5>Description</h5>

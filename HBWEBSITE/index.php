@@ -26,6 +26,17 @@
 </head>
 
 <body class="bg-light">
+<form class="availability-form" method="GET" action="rooms.php">
+  <label>Check-in Date:</label>
+  <input type="date" name="check_in" required>
+
+  <label>Check-out Date:</label>
+  <input type="date" name="check_out" required>
+
+  <button type="submit">Check Availability</button>
+</form>
+
+
 
   <?php require('inc/header.php'); ?>
 
@@ -472,6 +483,15 @@
               data;
             }
             ?>
+            <div class="text-center">
+            <h6 class="mb-4">200$ per night</h6>
+            
+            <a href="payment.php?room_id=<?= $room_data['id'] ?>" class="btn btn-sm w-100 text-white custom-bg shadow-none">Book Now</a>
+          
+            <a href="room_details.php?id=<?= $room_data['id'] ?>" class="btn btn-sm w-100 btn-outline-dark shadow-none mb-2 mt-1">More details</a>
+          </div>
+          
+            
 
           <a href="<?php echo $contact_r['insta']?>" class="d-inline-blok mb-lg-3">
             <span class="badge bg-light text-dark fs-6 p-2">

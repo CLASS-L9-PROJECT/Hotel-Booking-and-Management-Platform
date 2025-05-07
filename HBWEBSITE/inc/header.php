@@ -1,11 +1,11 @@
 <?php
 session_start();
 
-// Admin panelin inc içindeki ayarlarý yükle
+// Admin panelin inc iï¿½indeki ayarlarï¿½ yï¿½kle
 require __DIR__ . '/../admin/inc/db_config.php';
 require __DIR__ . '/../admin/inc/essentials.php';
 
-// Ýletiþim detaylarýný çek (footer vs. için)
+// ï¿½letiï¿½im detaylarï¿½nï¿½ ï¿½ek (footer vs. iï¿½in)
 $contact_q = "SELECT * FROM `contact_details` WHERE `sr_no`=?";
 $contact_r = mysqli_fetch_assoc(
   select($contact_q, [1], 'i')
@@ -27,16 +27,20 @@ $contact_r = mysqli_fetch_assoc(
         <li class="nav-item"><a class="nav-link" href="<?php echo SITE_URL; ?>about.php">About</a></li>
       </ul>
       <div class="d-flex">
-        <?php if (!empty($_SESSION['userLogin'])): ?>
-          <a href="<?php echo SITE_URL; ?>logout.php" class="btn btn-outline-dark">Logout</a>
-        <?php else: ?>
-          <button class="btn btn-outline-dark me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
-          <button class="btn btn-outline-dark"      data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
-        <?php endif; ?>
-      </div>
+  <?php if (!empty($_SESSION['userLogin'])): ?>
+    <a href="<?php echo SITE_URL; ?>logout.php" class="btn btn-outline-dark me-2">Logout</a>
+  <?php else: ?>
+    <button class="btn btn-outline-dark me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+    <button class="btn btn-outline-dark me-2" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
+    <a href="<?php echo SITE_URL; ?>cancel.php" class="btn btn-outline-danger">Cancel</a>
+  <?php endif; ?>
+</div>
+
     </div>
   </div>
 </nav>
+
+
 
 <!-- LOGIN MODAL -->
 <div id="loginModal" class="modal fade" tabindex="-1">
