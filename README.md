@@ -31,8 +31,6 @@ Provides both a public-facing site for guests to browse rooms, make reservations
 
 ## Demo Screenshots
 
-> *Insert relevant screenshots of the public site and admin panel here.*
-
 ---
 
 ## Features
