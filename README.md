@@ -6,7 +6,7 @@
 | Ege Bora | Güzel   | 58351      |
 | İrfan    | Bağ     | 49279      |
 | Cenker   | Şule    | 58566      |
-| Efe Berk | Tanrı   | 59115      |
+| Efe Berk | Tancı   | 59115      |
 | Berke    | Turk    | 58169      |
 
 # Hotel Booking and Management Platform
